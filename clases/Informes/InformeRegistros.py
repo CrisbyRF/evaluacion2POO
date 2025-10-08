@@ -1,0 +1,21 @@
+from Informe import Informe
+
+class InformeRegistros(Informe):
+    def __init__(self, formato='', fecha_creacion='', registros = None):
+        super().__init__(formato, fecha_creacion)
+        if registros == None:
+            self.registros = []
+        self.registros = registros
+        
+    def generarInforme(self):
+        if not self.registros:
+            print('\nNo hay registros registrados\n')
+            return
+        pass
+    
+#Ejemplo de uso
+#informe = InformeRegistros(
+#    formato='PDF',
+#    fecha_creacion=str(date.today()),
+#    registros = [registro1, registro2]
+#)
