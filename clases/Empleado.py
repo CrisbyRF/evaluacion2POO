@@ -1,11 +1,11 @@
-from Persona import Persona
+from clases.modelos.Persona import Persona
 from RegistroHorario import RegistroHorario
 from datetime import datetime
 
 fecha_actual = datetime.now().strftime("%d-%m-%Y")
 
 class Empleado(Persona):
-    def __init__(self, nombre='', direccion='', telefono='', email='', inicio_contrato = '', salario = 0, proyectos = None ):
+    def __init__(self, nombre='', direccion='', telefono='', email='', inicio_contrato = None, salario = 0, proyectos = None ):
         #CAMBIAR EL TIPO DE DATO DE PROYECTOS PARA CUANDO HAYA UNO
         super().__init__(nombre, direccion, telefono, email)
         self.inicio_contrato = inicio_contrato

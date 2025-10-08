@@ -2,7 +2,7 @@ from Empleado import Empleado
 
 #Un gerente es un tipo de empleado, por lo que hay herencia
 class Gerente(Empleado):
-    def __init__(self, nombre='', direccion='', telefono='', email='', inicio_contrato='', salario=0, proyectos=None, administrador = False, cargo = '', empleados = None ):
+    def __init__(self, nombre='', direccion='', telefono='', email='', inicio_contrato=None, salario=0, proyectos=None, administrador = False, cargo = '', empleados = None ):
         super().__init__(nombre, direccion, telefono, email, inicio_contrato, salario, proyectos)
         self.administrador = administrador
         self.cargo = cargo

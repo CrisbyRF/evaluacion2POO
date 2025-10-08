@@ -1,5 +1,5 @@
 class RegistroHorario:
-    def __init__(self, horas_trabajadas = 0, fecha= '', descripcion_tareas = ''):
+    def __init__(self, horas_trabajadas = 0, fecha= None, descripcion_tareas = ''):
         self.__horas_trabajadas = horas_trabajadas
         self.__fecha = fecha
         self.__descripcion_tareas = descripcion_tareas

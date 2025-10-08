@@ -1,4 +1,4 @@
-from Informe import Informe
+from clases.modelos.Informe import Informe
 
 class InformeDeparamentos(Informe):
     def __init__(self, formato='', fecha_creacion='', departamentos = None):

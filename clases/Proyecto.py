@@ -2,7 +2,7 @@ from datetime import datetime
 
 #EN LA INTERFAZ MOSTRAR UNA OPCIÓN PARA VOLVER ATRÁS EN CASO DE QUE EL USUARIO SE HAYA EQUIVOCADO EN CADA SELECCION
 class Proyecto:
-    def __init__(self, nombre = '', descripcion = '', fecha_inicio = '', empleados = None):
+    def __init__(self, nombre = '', descripcion = '', fecha_inicio = None, empleados = None):
         self.nombre = nombre
         self.descripcion = descripcion
         self.fecha_inicio = fecha_inicio
