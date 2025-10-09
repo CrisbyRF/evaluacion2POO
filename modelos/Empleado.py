@@ -1,5 +1,5 @@
-from clases.modelos.Persona import Persona
-from RegistroHorario import RegistroHorario
+from .Persona import Persona
+from modelos.RegistroHorario import RegistroHorario
 import mysql.connector
 from datetime import date
 
@@ -26,8 +26,7 @@ class Empleado(Persona):
         if salario < 0:
             raise ValueError('\nEl salario no puede ser negativo\n')
         self.__salario = salario
-        
-                
+                     
             
     def crearRegistro(self):
         horas_trabajadas = int(input('Ingrese sus horas trabajadas: '))

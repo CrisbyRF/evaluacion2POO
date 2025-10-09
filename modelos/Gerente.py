@@ -1,4 +1,4 @@
-from Empleado import Empleado
+from .Empleado import Empleado
 import mysql.connector
 
 #Un gerente es un tipo de empleado, por lo que hay herencia
