@@ -4,6 +4,8 @@ class RegistroHorario:
         self.__fecha = fecha
         self.__descripcion_tareas = descripcion_tareas
         
+    #IMPLEMENTAR GETTER Y SETTER
+        
     def get_horas_trabajadas (self):
         return self.__horas_trabajadas
     
