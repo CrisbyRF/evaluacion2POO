@@ -1,5 +1,5 @@
 from abc import ABC
-from validaciones.funciones import validar_dato, validar_email
+from validaciones.funciones import validar_dato, validar_email, validar_telefono
 
 class Persona(ABC):
     def __init__(self, nombre = '', direccion = '', telefono = '', email = ''):
@@ -32,8 +32,7 @@ class Persona(ABC):
     
     @telefono.setter
     def telefono(self, telefono):
-        if not telefono or len(telefono.strip()) == 0:
-            raise ValueError('\n¡Este campo no puede quedar vacío!\n')
+        validar_telefono(telefono)
         self.__telefono = telefono.strip()
         
     @property
@@ -42,6 +41,5 @@ class Persona(ABC):
     
     @email.setter
     def email(self, email):
-        if not email or len(email.strip()) == 0:
-            raise ValueError('\n¡Este campo no puede quedar vacío!\n')
+        validar_email(email)
         self.__email = email

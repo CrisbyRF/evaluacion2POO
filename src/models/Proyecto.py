@@ -1,12 +1,13 @@
-from datetime import datetime
+from datetime import date
 import mysql.connector
 from ...validaciones.funciones import validar_dato, validar_fecha, validar_entrada
 #EN LA INTERFAZ MOSTRAR UNA OPCIÓN PARA VOLVER ATRÁS EN CASO DE QUE EL USUARIO SE HAYA EQUIVOCADO EN CADA SELECCION
 class Proyecto:
-    def __init__(self, nombre = '', descripcion = '', fecha_inicio = None, estado = False):
+    def __init__(self, nombre = '', descripcion = '', fecha_inicio = None, fecha_fin = None, estado = True):
         self.__nombre = nombre
         self.__descripcion = descripcion
         self.__fecha_inicio = fecha_inicio
+        self.__fecha_fin = fecha_fin
         self.__estado = estado
         self.__asignaciones = [] #Lista de empleados
 
@@ -19,6 +20,43 @@ class Proyecto:
         validar_dato(nuevo_nombre)
         self.__nombre = nuevo_nombre
         
+    @property
+    def descripcion (self):
+        return self.__descripcion
+    
+    @descripcion.setter
+    def descripcion (self, descripcion):
+        validar_dato(descripcion)
+        self.__descripcion = descripcion
+        
+    @property
+    def fecha_inicio (self):
+        return self.__fecha_inicio
+    
+    @fecha_inicio.setter
+    def fecha_inicio (self, fecha_inicio):
+        validar_fecha(fecha_inicio)
+        self.__fecha_inicio = fecha_inicio
+        
+    @property
+    def estado (self):
+        return self.__estado
+    
+    @estado.setter
+    def estado (self, nuevo_estado):
+        self.__estado = nuevo_estado
+        
+    def verificar_estado(self):
+        if self.__estado and self.__fecha_fin and date.today() > self.__fecha_fin:
+            self.__estado = False
+            
+    @property
+    def asignaciones (self):
+        return self.__asignaciones
+    
+    def tiene_asignaciones (self):
+        return bool(self.__asignaciones)
+            
     def crearProyecto(self, db_conexion, nombre, descripcion, fecha_inicio):
         try:
             cursor = db_conexion.cursor()
@@ -141,8 +179,11 @@ class Proyecto:
         #Preguntar para confirmación de eliminación de proyecto
         #No retornar nada
         
-    def listarProyectos(self):
-        pass
+    def listarProyectos(self, db_conexion):
+        cursor = db_conexion.cursor()
+        query = "SELECT * FROM proyecto"
+        resultado = cursor.execute(query)
+        print(resultado)
         #No retornar nada
         
     def asignarEmpleado(self, id_empleado):

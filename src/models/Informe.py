@@ -2,8 +2,10 @@ from abc import ABC, abstractmethod
 
 class Informe (ABC):
     def __init__(self, formato = '', fecha_creacion = None):
-        self.formato = formato
-        self.fecha_creacion = fecha_creacion
+        self.__formato = formato
+        self.__fecha_creacion = fecha_creacion
+        
+    #IMPLEMENTAR GETTER
         
     @abstractmethod
     def generarInforme(self):

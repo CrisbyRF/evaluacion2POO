@@ -1,10 +1,12 @@
 class Departamento:
     def __init__(self, nombre, empleados = None, gerente = ''):
-        self.nombre = nombre
+        self.__nombre = nombre
         if empleados == None:
-            self.empleados = []
-        self.empleados = empleados
-        self.gerente = gerente
+            self.__empleados = []
+        self.__empleados = empleados
+        self.__gerente = gerente
+    
+    #IMPLEMENTAR GETTER Y SETTER
     
     def crearDepartamento(self, gerente):
         nombre_departamento = input('Ingrese el nombre del departamento: ')

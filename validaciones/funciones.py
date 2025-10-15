@@ -1,15 +1,15 @@
 import re
 import datetime
 
-def validar_dato (dato):
+def validar_dato (prompt):
     while True:
-        if not dato:
+        if not prompt:
             print('\n¡El campo no puede quedar vacío!\n')
             continue
-        if any(char in dato for char in ['<', '>', ';', '--', '/*', '*/']):
+        if any(char in prompt for char in ['<', '>', ';', '--', '/*', '*/']):
             print('\nCaracteres no permitidos\n')
             continue
-        return dato
+        return prompt
     
 def validar_entrada(prompt):
     while True:
@@ -55,5 +55,22 @@ def validar_fecha(prompt):
         try:
             datetime.strptime(fecha, '%d-%m-%Y')
             return fecha
-        except ValueError:
+        except ValueError:            
             print('\nFormato de fecha inválido, utilice el formato DD-MM-YYYY\n')
+
+def validar_telefono(prompt):
+    import re
+    patron = r'^(\+56)?(9\d{8})$'
+    while True:
+        telefono = input(prompt).strip()
+        if not telefono:
+            print('\n¡El campo no puede quedar vacío!\n')
+            continue
+        if any(char in telefono for char in ['<', '>', ';', '--', '/*', '*/']):
+            print('\nCaracteres no permitidos\n')
+            continue
+        if not re.match(patron, telefono):
+            print('\nNúmero inválido. Debe tener formato +569XXXXXXXX o 9XXXXXXXX\n')
+            continue
+        return telefono
+    

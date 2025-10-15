@@ -5,9 +5,11 @@ import mysql.connector
 class Gerente(Empleado):
     def __init__(self, nombre='', direccion='', telefono='', email='', inicio_contrato=None, salario=0, proyecto=None, administrador = False, cargo = '', empleados = None ):
         super().__init__(nombre, direccion, telefono, email, inicio_contrato, salario, proyecto)
-        self.administrador = administrador
-        self.cargo = cargo
-        self.empleados = empleados if empleados is not None else []
+        self.__administrador = administrador
+        self.__cargo = cargo
+        self.__empleados = empleados if empleados is not None else []
+        
+    #IMPLEMENTAR  GETTER Y SETTER
         
     def generarInforme(self):
         #Aplicar lógica

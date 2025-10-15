@@ -4,11 +4,13 @@ class InformeRegistros(Informe):
     def __init__(self, formato='', fecha_creacion='', registros = None):
         super().__init__(formato, fecha_creacion)
         if registros == None:
-            self.registros = []
-        self.registros = registros
+            self.__registros = []
+        self.__registros = registros
+        
+        #IMPLEMENTAR GETTER
         
     def generarInforme(self):
-        if not self.registros:
+        if not self.__registros:
             print('\nNo hay registros registrados\n')
             return
         pass
