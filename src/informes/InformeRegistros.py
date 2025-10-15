@@ -1,4 +1,5 @@
-from clases.modelos.Informe import Informe
+from models.Informe import Informe
+
 
 class InformeRegistros(Informe):
     def __init__(self, formato='', fecha_creacion='', registros = None):
