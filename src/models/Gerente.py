@@ -14,34 +14,34 @@ class Gerente(Empleado):
         pass
     
     @classmethod
-    def registrarEmpleado(cls, nombre, direccion, telefono, email, inicio_contrato, salario, proyecto, db_conection):
+    def registrarEmpleado(cls, nombre, direccion, telefono, email, inicio_contrato, salario, proyecto, db_conexion):
         try:
-            cursor = db_conection.cursor()
-            query = """
+            cursor = db_conexion.cursor()
+            consulta = """
                 INSERT INTO empleado
                 (nombre, direccion, telefono, email, fecha_inicio, salario, proyectos)
                 VALUES (%s, %s, %s, %s, %s, %s, %s)
             """
             valores = (nombre, direccion, telefono, email, inicio_contrato, salario, proyecto)
-            cursor.execute(query, valores)
-            db_conection.commit()
+            cursor.execute(consulta, valores)
+            db_conexion.commit()
             print(f'\nEmpleado {nombre} creado exitosamente\n')
             return True
         except mysql.connector.IntegrityError as err:
             print('\n¡El empleado ya existe o email duplicado!\n')
-            db_conection.rollback()
+            db_conexion.rollback()
             return False
         except mysql.connector.Error as err:
             print(f'\nError al crear empleado: {err}\n')
-            db_conection.rollback()
+            db_conexion.rollback()
             return False
         finally:
             cursor.close()
     
     @staticmethod 
-    def listarEmpleados(db_conection):
+    def listarEmpleados(db_conexion):
         try:
-            cursor = db_conection.cursor(dictionary = True)
+            cursor = db_conexion.cursor(dictionary = True)
             query = """
                 SELECT * FROM empleados
             """ 

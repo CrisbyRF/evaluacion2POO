@@ -1,5 +1,16 @@
 import re
+import datetime
 
+def validar_dato (dato):
+    while True:
+        if not dato:
+            print('\n¡El campo no puede quedar vacío!\n')
+            continue
+        if any(char in dato for char in ['<', '>', ';', '--', '/*', '*/']):
+            print('\nCaracteres no permitidos\n')
+            continue
+        return dato
+    
 def validar_entrada(prompt):
     while True:
         entrada = input(prompt).strip()
@@ -33,3 +44,16 @@ def validar_email(email_recibido):
         return False, "\nFormato de email inválido\n"
     
     return True, "\nEmail válido\n"
+
+def validar_fecha(prompt):
+    while True:
+        fecha = input(prompt).strip()
+        
+        if not fecha:
+            print('\n¡El campo no puede quedar vacío!\n')
+            return None
+        try:
+            datetime.strptime(fecha, '%d-%m-%Y')
+            return fecha
+        except ValueError:
+            print('\nFormato de fecha inválido, utilice el formato DD-MM-YYYY\n')

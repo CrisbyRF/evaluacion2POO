@@ -1,10 +1,10 @@
-from modelos.Empleado import Empleado
-from modelos.Departamento import Departamento
-from modelos.Proyecto import Proyecto
-from modelos.Gerente import Gerente
-from modelos.RegistroHorario import RegistroHorario
-from conexion_bd import ConexionBd
-from validaciones.seguridad import validar_email, validar_entrada
+from models.Empleado import Empleado
+from models.Departamento import Departamento
+from src.models.Proyecto import Proyecto
+from models.Gerente import Gerente
+from models.RegistroHorario import RegistroHorario
+from config import ConexionBd
+from validaciones.funciones import validar_email, validar_entrada
 import sys
 
 database = None
