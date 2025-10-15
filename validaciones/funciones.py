@@ -24,26 +24,26 @@ def validar_entrada(prompt):
         
         return entrada
         
-def validar_email(email_recibido):
-    if not email_recibido:
-        return False, "El email no puede estar vacío"
+def validar_email(prompt):
+    email = input(prompt.strip())
     
-    email_recibido = email_recibido.strip()
+    if not email:
+        return False, 'El email no puede estar vacío'
     
     patron = r'^[a-zA-Z0-9][a-zA-Z0-9._%+-]*@[a-zA-Z0-9][a-zA-Z0-9.-]*\.[a-zA-Z]{2,}$'
     
-    if not re.match(patron, email_recibido):
+    if not re.match(patron, email):
         print('\nEmail inválido\n')
         return False
 
     try:
-        dominio = email_recibido('@')[1]
+        dominio = email.split('@')[1]
         if dominio.startswith('-') or dominio.endswith('-'):
             return False, "\nEl dominio no puede empezar o terminar con guión\n"
     except IndexError:
         return False, "\nFormato de email inválido\n"
     
-    return True, "\nEmail válido\n"
+    return email
 
 def validar_fecha(prompt):
     while True:

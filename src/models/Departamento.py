@@ -8,7 +8,7 @@ class Departamento:
     
     #IMPLEMENTAR GETTER Y SETTER
     
-    def crearDepartamento(self, gerente):
+    def crearDepartamento(self,nombre, gerente):
         nombre_departamento = input('Ingrese el nombre del departamento: ')
         empleados = [] #Aplicar logica mas adelante
         departamento_final = Departamento(nombre_departamento, empleados, gerente)
