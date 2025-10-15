@@ -8,6 +8,13 @@ class Persona(ABC):
         self.__telefono = telefono
         self.__email = email
         
+    def __str__(self):
+        return (
+            f"Nombre: {self.nombre}\n"
+            f"Dirección: {self.direccion}\n"
+            f"Teléfono: {self.telefono}\n"
+            f"Email: {self.email}"
+        )
     @property
     def nombre(self):
         return self.__nombre
@@ -42,4 +49,4 @@ class Persona(ABC):
     @email.setter
     def email(self, email):
         validar_email(email)
-        self.__email = email
+        self.__email = email.strip()

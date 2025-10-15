@@ -1,5 +1,5 @@
 class EmpleadoProyecto:
-    def __init__(self, empleado = None, proyecto = None, rol = '', fecha_inicio = None, fecha_fin = Date):
+    def __init__(self, empleado = None, proyecto = None, rol = '', fecha_inicio = None, fecha_fin = None):
         self.__empleado = empleado
         self.__proyecto = proyecto
         self.__rol = rol

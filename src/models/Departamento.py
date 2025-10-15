@@ -32,15 +32,18 @@ class Departamento:
         #Pedir confirmacion para eliminar
         #No retornar nada
     
-    def asignarEmpleado(self, id_empleado):
-        #Mostrar listado de empleados
-        empleado_seleccion = int(input('Ingrese el ID del empleado que desee asignar: ')) #Solo mostrar empleados que no esten asignados a un depa
-        #Mostrar listado de departamentos
-        departamento_seleccion = int(input('Ingrese el ID del departamento al que desee asignar el empleado: '))
-        #Pedir confirmación
+    def asignarEmpleado(self, empleado):
+        if empleado.departamento is not None:
+            print(f'\nEl empleado ya pertenece al departamento: {empleado.departamento.nombre}')
+            return False
+        self.__empleados.append(empleado)
+        empleado.asignarDepartamento(self)
+        return True
     
-    def desasignarEmpleado(self, id_empleado):
-        #Mostrar listado de empleados con su respectivo ID y departamentos asignados
-        empleado_seleccion = input('Ingrese el ID del empleado que desee desasignar de su departamento: ')
-        #Pedir confirmacion al usuario de la desasignacion
-        #No retornar nada
+    def desasignarEmpleado(self, empleado):
+        if empleado not in self.__empleados:
+            print(f'\nEl empleado {empleado.nombre} no pertenece a este departamento\n')
+            return
+        self.__empleados.remove(empleado)
+        empleado.asignarDepartamento(None)
+        print(f'\nEl empleado {empleado.nombre} ha sido designado del departamento {self.nombre}\n')
