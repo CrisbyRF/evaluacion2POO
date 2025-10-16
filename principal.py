@@ -1,4 +1,5 @@
 from config.ConexionBd import ConexionBd
+from src.models.Departamento import Departamento
 from validaciones.funciones import validar_email, validar_entrada, validar_telefono
 
 database = None
@@ -8,7 +9,11 @@ def menu_gerente():
         database = ConexionBd('localhost', 'root', '', 'ecotech_solutions') #colocar datos de la base de datos
         conexion = database.conectar()
         
+        
+        
         while True:
+            d = Departamento('', [], '')
+            d.crearDepartamento('Recursos humanos', ' Cristóbal Rey', conexion)
             print('==========================================')
             print("SISTEMA DE GESTIÓN - ECHOTECH SOLUTIONS")
             print('==========================================')
@@ -21,6 +26,7 @@ def menu_gerente():
             print('==========================================')
             
             try:
+                
                 seleccion = input('\nSelecciona una opción: ').strip()
                 
                 match seleccion:
@@ -34,7 +40,7 @@ def menu_gerente():
                             nombre_empleado = validar_entrada('Nombre completo: ')
                             direccion = validar_entrada("Dirección: ")  
                             telefono = validar_telefono("Teléfono: ")
-                            email = str(validar_email("Email: "))
+                            email = validar_email("Email: ")
                             valores = (nombre_empleado, direccion, telefono, email)
                             cursor.execute(query, valores)
                             conexion.commit()
