@@ -1,15 +1,14 @@
 from .Persona import Persona
 from models.RegistroHorario import RegistroHorario
-from validaciones.funciones import validar_entrada, validar_fecha
-import mysql.connector
+from validaciones.funciones import validar_entrada, validar_fecha, validar_dato
 from datetime import date
 
 class Empleado(Persona):
-    def __init__(self, nombre='', direccion='', telefono='', email='', inicio_contrato = None, salario = 0, departamento = None):
-        #CAMBIAR EL TIPO DE DATO DE PROYECTOS PARA CUANDO HAYA UNO
+    def __init__(self, nombre='', direccion='', telefono='', email='', inicio_contrato = None, salario = 0, cargo = 'Empleado',departamento = None):
         super().__init__(nombre, direccion, telefono, email)
         self.__inicio_contrato = inicio_contrato or date.today()
         self.__salario = salario
+        self.__cargo = cargo
         self.__departamento = departamento
         self.__asignaciones = []
         
@@ -31,6 +30,18 @@ class Empleado(Persona):
     @property
     def inicio_contrato(self):
         return self.__inicio_contrato
+    
+    @property
+    def cargo (self):
+        return self.__cargo
+    
+    @cargo.setter
+    def cargo (self, nuevo_cargo):
+        validar_dato(nuevo_cargo)
+        if nuevo_cargo not in ('Empleado', 'Gerente'):
+            print('\nCargo inválido. Solo se permite "empleado" o "gerente".\n')
+            return
+        self.__cargo = nuevo_cargo
     
     @property
     def salario (self):

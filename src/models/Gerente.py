@@ -1,12 +1,12 @@
 from .Empleado import Empleado
 import mysql.connector
+from validaciones.funciones import validar_entrada
 
 #Un gerente es un tipo de empleado, por lo que hay herencia
 class Gerente(Empleado):
-    def __init__(self, nombre='', direccion='', telefono='', email='', inicio_contrato=None, salario=0, proyecto=None, administrador = False, cargo = '', empleados = None ):
+    def __init__(self, nombre='', direccion='', telefono='', email='', inicio_contrato=None, salario=0, proyecto=None, administrador = False, empleados = None ):
         super().__init__(nombre, direccion, telefono, email, inicio_contrato, salario, proyecto)
         self.__administrador = administrador
-        self.__cargo = cargo
         self.__empleados = empleados if empleados is not None else []
         
     #IMPLEMENTAR  GETTER Y SETTER
@@ -16,16 +16,21 @@ class Gerente(Empleado):
         pass
     
     @classmethod
-    def registrarEmpleado(cls, nombre, direccion, telefono, email, inicio_contrato, salario, proyecto, db_conexion):
+    def registrarEmpleado(cls, nombre, cargo, direccion, telefono, email, inicio_contrato, salario, proyecto, db_conexion):
         try:
             cursor = db_conexion.cursor()
-            consulta = """
+            query = """
                 INSERT INTO empleado
-                (nombre, direccion, telefono, email, fecha_inicio, salario, proyectos)
-                VALUES (%s, %s, %s, %s, %s, %s, %s)
+                (nombre_empleado, cargo, direccion_empleado, telefono_empleado, email_empleado, fecha_inicio, salario, proyectos)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             """
-            valores = (nombre, direccion, telefono, email, inicio_contrato, salario, proyecto)
-            cursor.execute(consulta, valores)
+            cargo = cargo.strip().capitalize()
+            
+            if cargo not in ('Empleado', 'Gerente'):
+                print('\nCargo inválido. Solo se permite "Empleado" o "Gerente".\n')
+                return
+            valores = (nombre, cargo, direccion, telefono, email, inicio_contrato, salario, proyecto)
+            cursor.execute(query, valores)
             db_conexion.commit()
             print(f'\nEmpleado {nombre} creado exitosamente\n')
             return True
