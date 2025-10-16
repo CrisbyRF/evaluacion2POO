@@ -1,19 +1,28 @@
 from .Empleado import Empleado
 import mysql.connector
-from validaciones.funciones import validar_entrada
 
-#Un gerente es un tipo de empleado, por lo que hay herencia
 class Gerente(Empleado):
     def __init__(self, nombre='', direccion='', telefono='', email='', inicio_contrato=None, salario=0, proyecto=None, administrador = False, empleados = None ):
         super().__init__(nombre, direccion, telefono, email, inicio_contrato, salario, proyecto)
         self.__administrador = administrador
-        self.__empleados = empleados if empleados is not None else []
+        self.__empleados = []
+        if empleados:
+            for empleado in empleados:
+                if isinstance(empleado, Empleado):
+                    self.__empleados.append(empleado)
+                else:
+                    raise TypeError("Todos los elementos deben ser instancias de Empleado")
         
-    #IMPLEMENTAR  GETTER Y SETTER
-        
-    def generarInforme(self):
-        #Aplicar lógica
-        pass
+    @property
+    def administrador(self):
+        return self.__administrador
+
+    @administrador.setter
+    def administrador(self, nuevo_valor):
+        if isinstance(nuevo_valor, bool):
+            self.__administrador = not nuevo_valor
+        else:
+            raise ValueError("El valor debe ser booleano (True o False)")
     
     @classmethod
     def registrarEmpleado(cls, nombre, cargo, direccion, telefono, email, inicio_contrato, salario, proyecto, db_conexion):

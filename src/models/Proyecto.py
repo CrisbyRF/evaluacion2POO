@@ -1,7 +1,7 @@
 from datetime import date
 import mysql.connector
 from ...validaciones.funciones import validar_dato, validar_fecha, validar_entrada
-#EN LA INTERFAZ MOSTRAR UNA OPCIÓN PARA VOLVER ATRÁS EN CASO DE QUE EL USUARIO SE HAYA EQUIVOCADO EN CADA SELECCION
+
 class Proyecto:
     def __init__(self, nombre = '', descripcion = '', fecha_inicio = None, fecha_fin = None, estado = True):
         self.__nombre = nombre
