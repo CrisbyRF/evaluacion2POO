@@ -69,7 +69,7 @@ class Empleado(Persona):
             
             cursor = db_conexion.cursor()
             query = """
-            INSERT INTO registroHorario (horas_trabajadas, fecha, descripcion)
+            INSERT INTO registr_horario (horas_trabajadas, fecha, descripcion)
             VALUES (%s, %s, %s)
             """
             valores = (horas_trabajadas, fecha_validada, descripcion_validada)

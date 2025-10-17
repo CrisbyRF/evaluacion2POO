@@ -57,7 +57,7 @@ class EmpleadoProyecto:
             try:
                 cursor = db_conexion.cursor()
                 query = """ 
-                        UPDATE empleadoProyecto SET rol = %s
+                        UPDATE empleado_proyecto SET rol = %s
                         WHERE id_empleado = %s AND id_proyecto = %s
                 """
                 valores = (nuevo_rol, self.__empleado.id_empleado, self.__proyecto.id_proyecto)
@@ -80,12 +80,15 @@ class EmpleadoProyecto:
         try:
             cursor = db_conexion.cursor(dictionary=True)
             cursor.execute("""
-                SELECT e.nombre, p.nombre, ep.rol, ep.fecha_inicio, ep.fecha_termino
-                FROM EmpleadoProyecto ep
+                SELECT
+                    e.nombre AS nombre_empleado,
+                    p.nombre AS nombre_proyecto,
+                    ep.rol, ep.fecha_inicio, ep.fecha_termino
+                FROM empleado_proyecto ep
                 JOIN empleado e ON ep.id_empleado = e.id_empleado
                 JOIN proyecto p ON ep.id_proyecto = p.id_proyecto
-                WHERE e.nombre = %s AND p.nombre = %s
-            """, (self.__empleado, self.__proyecto))
+                WHERE e.id_empleado = %s AND p.id_proyecto = %s
+            """, (self.__empleado.id_empleado, self.__proyecto.id_proyecto))
             resultado = cursor.fetchone()
             if resultado:
                 print(f"\nDetalle de asignación:")
@@ -93,7 +96,7 @@ class EmpleadoProyecto:
                 print(f"- Proyecto: {resultado['nombre_proyecto']}")
                 print(f"- Rol: {resultado['rol']}")
                 print(f"- Inicio: {resultado['fecha_inicio']}")
-                print(f"- Término: {resultado['fecha_fin']}")
+                print(f"- Término: {resultado['fecha_termino']}")
             else:
                 print("\nNo se encontró la asignación en la base de datos.\n")
         except Exception as e:
