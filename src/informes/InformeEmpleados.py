@@ -3,11 +3,10 @@ from models.Informe import Informe
 class InformeEmpleados(Informe):
     def __init__(self, formato='', fecha_creacion='', empleados = None):
         super().__init__(formato, fecha_creacion)
-        if empleados == None:
-            self.__empleados = []
-        self.__empleados = empleados
+        self.__empleados = empleados if empleados is not None else []
         
-        #IMPLEMENTAR GETTER
+    def empleados(self):
+        return self.__empleados
         
     def generarInforme(self):
         if not self.__empleados:

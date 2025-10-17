@@ -4,10 +4,7 @@ from models.Informe import Informe
 class InformeProyectos(Informe):
     def __init__(self, formato='', fecha_creacion='', proyectos = None):
         super().__init__(formato, fecha_creacion)
-        if proyectos == None:
-            self.__proyectos = []
-        self.__proyectos = proyectos
-        
+        self.__proyectos = proyectos if proyectos is not None else []
         #IMPLEMENTAR GETTER
         
     def generarInforme(self):

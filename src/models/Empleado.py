@@ -90,11 +90,10 @@ class Empleado(Persona):
             print('\n¡Debe proporcionar un departamento válido!\n')
             return self
         self.__departamento = departamento
-        departamento.asignarnarEmpleado(self)
+        departamento.asignarEmpleado(self)
         return self
         
     def actualizarDatos(self, db_conexion):
-        
         opciones = {
             "1": "nombre",
             "2": "direccion",

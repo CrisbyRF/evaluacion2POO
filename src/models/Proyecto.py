@@ -4,11 +4,11 @@ from ...validaciones.funciones import validar_dato, validar_fecha, validar_entra
 
 class Proyecto:
     def __init__(self, nombre = '', descripcion = '', fecha_inicio = None, fecha_fin = None, estado = True):
-        self.__nombre = nombre
-        self.__descripcion = descripcion
+        self.__nombre = nombre #maximo de 150
+        self.__descripcion = descripcion #maximo de 250
         self.__fecha_inicio = fecha_inicio
         self.__fecha_fin = fecha_fin
-        self.__estado = estado
+        self.__estado = estado #booleano
         self.__asignaciones = [] #Lista de empleados
 
     @property
